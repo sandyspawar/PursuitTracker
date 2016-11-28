@@ -1,0 +1,71 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{getTitle()}}
+    </div>
+
+    <!-- Filter the pursuits   -->
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-2'>Filter by:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]= 'listFilter' />
+            </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-6'>
+                <h3>Filtered by: {{listFilter}} </h3>
+            </div>
+        </div>
+
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+        <div style='align:right'><button class='btn' 
+                            (click)= 'togglePursuitInfo()'>
+                            {{ (showPursuitInfo ? "Hide Pursuit Info" : "Show Pursuit Info")}}                             
+                            </button>                           
+                        </div>
+        <div class='table-responsive'>
+            <table class='table' *ngIf='pursuits && pursuits.length'>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Pursuit Number</th>
+                        <th>Pursuit Name</th>
+                        <th>Client</th>
+                        <th>Unit</th>
+                        <th>Region</th>
+                        <th>Billing Type</th>
+                        <th>AE</th>
+                        <th>Stage</th>
+                        <th>Risk Level</th>
+                        <th>Other Details</th>                                                
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor='let pursuit of pursuits'>
+                        <td>
+                            <a [routerLink]="['/pursuit', pursuit.PursuitNumber]">
+                                <img 
+                                src='app/assets/images/page_edit.png'
+                                [title] = 'pursuit.PursuitName' />
+                            </a>
+                        </td>
+                        <td>{{ pursuit.PursuitNumber }}</td>
+                        <td>{{ pursuit.PursuitName }}</td>
+                        <td>{{ pursuit.ClientName }}</td>
+                        <td>{{ pursuit.Unit }}</td>
+                        <td>{{ pursuit.Region }}</td>
+                        <td>{{ pursuit.BillingType }}</td>
+                        <td>{{ pursuit.AE }} </td>
+                        <td>{{ pursuit.Stage }}</td>
+                        <td>
+                            <sc-risk [risklevel] ='pursuit.RiskLevel' 
+                            *ngIf='pursuit.RiskLevel'>
+                            </sc-risk>
+                        </td>
+                        <td>{{ (showPursuitInfo ? pursuit.Details : pursuit.Details.substring(0,3) +"..." )}}</td>                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+[
+    {
+        "ASLNumber": 1,
+        "AgentName": "Sogeti",
+        "AgentEmail": "snadepe.s.pawar@gmail.com",        
+        "SupplierManagerName": "Dru",
+        "isActive": "Yes",
+        "Area": "NAM",
+        "GeomarketOrCenter": "ABC",
+        "ProductGroup": "",
+        "StageGate": "01",
+        "RiskLevel": "",
+        "CurrentActor": "Supplier Manager",
+        "NextActor": "Agent"         
+    },
+    {
+        "ASLNumber": 1,
+        "AgentName": "Sogeti",
+        "AgentEmail": "snadepe.s.pawar@gmail.com",        
+        "SupplierManagerName": "Dru",
+        "isActive": "Yes",
+        "Area": "NAM",
+        "GeomarketOrCenter": "ABC",
+        "ProductGroup": "",
+        "StageGate": "01",
+        "RiskLevel": "",
+        "CurrentActor": "Supplier Manager",
+        "NextActor": "Agent"         
+    }
+]

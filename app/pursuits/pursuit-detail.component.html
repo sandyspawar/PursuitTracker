@@ -1,0 +1,53 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{getTitle()}}
+    </div>
+    <div style='align:right'>
+        <button class='btn' 
+            (click)= 'togglePursuitInfo()'>
+            {{ (showPursuitInfo ? "Hide Pursuit Info" : "Show Pursuit Info")}}                             
+            </button>                           
+    </div>
+    <!-- Filter the pursuits   -->
+    <div class='panel-body'>
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+        <div class='table-responsive'>
+            <table *ngIf='pursuit'>                
+                <tr><td>Pursuit Number </td><td> &nbsp;: &nbsp;</td>                    
+                    <td>{{ pursuit.PursuitNumber }}</td>
+                </tr>
+                <tr><td>Pursuit Name </td><td> &nbsp;: &nbsp;</td>
+                    <td>{{ pursuit.PursuitName }}</td>
+                </tr>
+                <tr><td>Client Name </td><td> &nbsp;: &nbsp;</td>
+                    <td>{{ pursuit.ClientName }}</td>
+                </tr>
+                <tr><td>Unit </td><td> &nbsp;: &nbsp;</td>
+                    <td>{{ pursuit.Unit }}</td>
+                </tr>
+                <tr><td>Region </td><td> &nbsp;: &nbsp;</td>
+                    <td>{{ pursuit.Region }}</td>
+                </tr>
+                <tr><td>Billing Type </td><td> &nbsp;: &nbsp;</td>
+                    <td>{{ pursuit.BillingType }}</td>
+                </tr>
+                <tr><td>AE </td><td> &nbsp;: &nbsp;</td>
+                    <td>{{ pursuit.AE }} </td>
+                </tr>
+                <tr><td>Stage </td><td> &nbsp;: &nbsp;</td>
+                    <td>{{ pursuit.Stage }}</td>
+                </tr>
+                <tr><td>Risk </td><td> &nbsp;: &nbsp;</td>
+                    <td>
+                        <sc-risk [risklevel] ='pursuit.RiskLevel' 
+                        *ngIf='pursuit.RiskLevel'>
+                        </sc-risk>
+                    </td>
+                </tr>
+                <tr><td>Details </td><td> &nbsp;: &nbsp;</td>
+                    <td>{{ (showPursuitInfo ? pursuit.Details : pursuit.Details.substring(0,3) +"..." )}}</td>                        
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>
