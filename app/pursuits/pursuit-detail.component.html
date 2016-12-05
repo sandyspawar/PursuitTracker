@@ -47,6 +47,10 @@
                 <tr><td>Details </td><td> &nbsp;: &nbsp;</td>
                     <td>{{ (showPursuitInfo ? pursuit.Details : pursuit.Details.substring(0,3) +"..." )}}</td>                        
                 </tr>
+                <tr><td colspan="3">
+                    <a class="btn btn-default" (click)="onBack()"> &lt; Back </a>
+                    </td>                        
+                </tr>
             </table>
         </div>
     </div>

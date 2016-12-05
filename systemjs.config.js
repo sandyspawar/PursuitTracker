@@ -25,6 +25,10 @@
 
       // other libraries
       'rxjs': 'npm:rxjs',
+      'angular2-highcharts': 'npm:angular2-highcharts',
+
+      // This mapping is for loading Highcharts static API and Highcharts modules
+      'highcharts': 'npm:highcharts',
 
        'angular2-google-maps/core': 'npm:angular2-google-maps/core/core.umd.js'
     },
@@ -35,6 +39,16 @@
         defaultExtension: 'js'
       },
       rxjs: {
+        defaultExtension: 'js'
+      },
+      'angular2-highcharts': {
+        main: './index.js',
+        defaultExtension: 'js'
+      },
+      'highcharts': {
+        // NOTE: You should set './highcharts.src.js' here
+        // if you are not going to use <chart type="StockChart"
+        main: './highstock.src.js',
         defaultExtension: 'js'
       }
     }

@@ -13,7 +13,7 @@
         </div>
         <div class='row'>
             <div class='col-md-6'>
-                <h3>Filtered by: {{listFilter}} </h3>
+                <h3>Filtered by: {{listFilter}}</h3>
             </div>
         </div>
 
@@ -35,16 +35,21 @@
                 </thead>
                 <tbody>
                     <tr *ngFor='let unit of units'>
-                        <td><img 
-                        src='app/assets/images/page_edit.png'
-                        [title] = 'unit.Name' /></td>
+                        <td>
+                            <a [routerLink]="['/unit', unit.ID]">
+                                <img 
+                                style="width:32px;height:32px"
+                                src='app/assets/images/openrecord.jpg'
+                                [title] = 'unit.Name' />
+                            </a>
+                        </td>
                         <td>{{ unit.Name }}</td>
                         <td>{{ unit.Region }}</td>
                         <td>{{ unit.State }}</td>
                         <td>{{ unit.latitude }}</td>
                         <td>{{ unit.longitude }}</td>
                         <td>{{ unit.GVP }}</td>
-                        <td>{{ unit.NoofConsultants }} </td>                                                
+                        <td>{{ getUnitConsultants(unit.ID) }} </td>                                                
                     </tr>
                 </tbody>
             </table>

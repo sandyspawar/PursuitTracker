@@ -12,7 +12,7 @@ import {PursuitDetailComponent} from './pursuit-detail.component';
 export class PursuitListComponent implements OnInit{
     pageTitle: string = "Pursuits List";
     showPursuitInfo: boolean = false;
-    listFilter: string = "sandy";
+    listFilter: string = "";
     pursuits: IPursuit[];
 
     constructor(private _pursuitService: PursuitService)

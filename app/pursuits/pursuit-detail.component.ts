@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IPursuit} from './Ipursuit';
 import {PursuitService} from './pursuit.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
     moduleId: module.id,
@@ -16,7 +16,8 @@ export class PursuitDetailComponent implements OnInit{
     pursuit: IPursuit;
 
     constructor(private _pursuitService: PursuitService, 
-                private _route: ActivatedRoute)
+                private _route: ActivatedRoute,
+                private _router: Router)
     {
 
     }
@@ -38,5 +39,10 @@ export class PursuitDetailComponent implements OnInit{
     getTitle(): string
     {
         return this.pageTitle;
+    }
+
+    onBack() : void
+    {
+        this._router.navigate(['/pursuits']);
     }
 };

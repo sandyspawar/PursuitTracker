@@ -11,9 +11,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var pursuit_service_1 = require("./pursuits/pursuit.service");
 var units_service_1 = require("./masters/units/units.service");
+var consultant_service_1 = require("./consultants/consultant.service");
 var AppComponent = (function () {
     function AppComponent() {
-        this.pageTitle = "Pursuit Tracker";
+        this.pageTitle = "Pursuits Tracker";
     }
     return AppComponent;
 }());
@@ -21,7 +22,7 @@ AppComponent = __decorate([
     core_1.Component({
         selector: 'pm-app',
         templateUrl: 'app/app.component.html',
-        providers: [pursuit_service_1.PursuitService, units_service_1.UnitService]
+        providers: [pursuit_service_1.PursuitService, units_service_1.UnitService, consultant_service_1.ConsultantService]
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);

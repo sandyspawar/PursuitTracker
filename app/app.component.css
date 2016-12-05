@@ -1,9 +1,10 @@
-li {
-    font-size: large;
+.navbar {
+    font-size: 1.1em;
 }
 
-div.panel-heading {
-   font-size: x-large; 
+.panel-heading{
+    font-size: 1.2em;
+    background-color: orangered;
+    padding: .5em .5em;
 }
-
 

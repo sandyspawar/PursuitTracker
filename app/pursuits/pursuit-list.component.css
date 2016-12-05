@@ -1,3 +1,9 @@
 thead{
     color: darkblue;
 }
+.panel-heading{
+    font-size: 1.1em;
+    background-color: orangered;
+    padding: .2em .2em;
+}
+

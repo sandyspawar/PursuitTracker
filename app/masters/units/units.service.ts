@@ -1,39 +1,32 @@
 import { Injectable } from '@angular/core';
 import { IUnit} from './iunit';
+import { Http} from '@angular/http';
+import { Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+
 
 @Injectable()
 export class UnitService
 {
+    unitURL: string = 'app/assets/data/unitdata.json';
+    units: IUnit[];
+
+    constructor(private _http: Http){
+
+    }
+
+    getUnit(id: number): IUnit{        
+        this.getUnitData().subscribe(d => this.units = d);
+        return this.units.find(i => i.ID == id);
+    }
+
+    getUnitData(): Observable<IUnit[]>{
+        return this._http.get(this.unitURL).map(r => <IUnit[]>r.json());
+    }
+
     getUnits(): IUnit[]{
-        return [
-            {
-                "Name": "Houston",
-                "Region": "South",
-                "State": "Texas",        
-                "latitude": 29.76043,
-                "longitude": -95.36980,
-                "GVP": "Cynthia",
-                "NoofConsultants": 101         
-            },
-            {
-                "Name": "Dallas",
-                "Region": "South",
-                "State": "Texas",        
-                "latitude": 32.77666,
-                "longitude": -96.79699,
-                "GVP": "Cynthia",
-                "NoofConsultants": 120         
-            },
-            {
-                "Name": "Austin",
-                "Region": "South",
-                "State": "Texas",        
-                "latitude": 30.26715,
-                "longitude": -97.74306,
-                "GVP": "Cynthia",
-                "NoofConsultants": 111         
-            }
-        ];
+        this.getUnitData().subscribe(d => this.units = d);
+        return this.units;
     }
 
 }

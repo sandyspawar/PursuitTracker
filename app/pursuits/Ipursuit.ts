@@ -14,4 +14,5 @@ export interface IPursuit
         ExpectedValue: number,
         Stage: string,
         RiskLevel: string,
+        
 }

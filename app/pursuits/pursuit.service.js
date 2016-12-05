@@ -9,73 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/map");
 var PursuitService = (function () {
-    function PursuitService() {
+    function PursuitService(_http) {
+        this._http = _http;
+        this.pursuitURL = 'app/assets/data/pursuitdata.json';
     }
     PursuitService.prototype.getPursuit = function (id) {
-        var pursuit;
-        var pursuits;
-        pursuits = this.getPursuits();
-        pursuit = pursuits[id - 1]; //(p => p.PursuitNumber = id); 
-        return pursuit;
+        var _this = this;
+        this.getPursuitsData().subscribe(function (i) { return _this.pursuits = i; });
+        return this.pursuits.find(function (i) { return i.PursuitNumber == id; });
     };
     PursuitService.prototype.getPursuits = function () {
-        return [
-            {
-                "PursuitNumber": 1,
-                "PursuitName": "Pursuit 1",
-                "ClientName": "Client 1",
-                "isActive": true,
-                "Unit": "Houston",
-                "Region": "South",
-                "BillingType": "Fixed",
-                "AE": "Meech",
-                "Lead": "",
-                "TeamMembers": "",
-                "Details": "about to stert in first quarter of 2017, need 3 developers and 1 lead",
-                "ExpectedValue": 200000,
-                "Stage": "03",
-                "RiskLevel": "Medium"
-            },
-            {
-                "PursuitNumber": 2,
-                "PursuitName": "Pursuit 2",
-                "ClientName": "Client 1",
-                "isActive": false,
-                "Unit": "Houston",
-                "Region": "South",
-                "BillingType": "T&M",
-                "AE": "Meech",
-                "Lead": "",
-                "TeamMembers": "",
-                "Details": "Finished the project in last quarter of 2016",
-                "ExpectedValue": 200000,
-                "Stage": "08",
-                "RiskLevel": "High"
-            },
-            {
-                "PursuitNumber": 3,
-                "PursuitName": "Pursuit 3",
-                "ClientName": "Client 2",
-                "isActive": true,
-                "Unit": "Houston",
-                "Region": "South",
-                "BillingType": "T&M",
-                "AE": "Tricia",
-                "Lead": "",
-                "TeamMembers": "",
-                "Details": "about to stert in first quarter of 2017, need 3 developers and 1 lead",
-                "ExpectedValue": 400000,
-                "Stage": "04",
-                "RiskLevel": "Medium"
-            }
-        ];
+        var _this = this;
+        this.getPursuitsData().subscribe(function (i) { return _this.pursuits = i; });
+        return this.pursuits;
+    };
+    PursuitService.prototype.getPursuitsData = function () {
+        return this._http.get(this.pursuitURL).map(function (r) { return r.json(); });
     };
     return PursuitService;
 }());
 PursuitService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [http_1.Http])
 ], PursuitService);
 exports.PursuitService = PursuitService;
 //# sourceMappingURL=pursuit.service.js.map

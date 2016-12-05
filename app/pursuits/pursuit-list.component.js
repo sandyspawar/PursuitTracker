@@ -15,7 +15,7 @@ var PursuitListComponent = (function () {
         this._pursuitService = _pursuitService;
         this.pageTitle = "Pursuits List";
         this.showPursuitInfo = false;
-        this.listFilter = "sandy";
+        this.listFilter = "";
     }
     PursuitListComponent.prototype.togglePursuitInfo = function () {
         this.showPursuitInfo = !this.showPursuitInfo;

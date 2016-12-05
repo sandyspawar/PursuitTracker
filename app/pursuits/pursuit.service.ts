@@ -1,69 +1,31 @@
 import { Injectable } from '@angular/core';
 import { IPursuit} from './ipursuit';
+import { Http, Response } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Injectable()
 export class PursuitService
 {
-    getPursuit(id: number): IPursuit{
-        let pursuit: IPursuit;
-        let pursuits: IPursuit[];
+    pursuitURL: string = 'app/assets/data/pursuitdata.json';
+    pursuits: IPursuit[];
 
-        pursuits = this.getPursuits();
-        pursuit = pursuits[id-1];//(p => p.PursuitNumber = id); 
-        return pursuit;
+    constructor(private _http: Http){
+
+    }
+
+    getPursuit(id: number): IPursuit{
+        this.getPursuitsData().subscribe(i => this.pursuits = i);
+        return this.pursuits.find(i => i.PursuitNumber == id);
     }
 
     getPursuits(): IPursuit[]{
-        return [
-            {
-                "PursuitNumber": 1,
-                "PursuitName": "Pursuit 1",
-                "ClientName": "Client 1",        
-                "isActive": true,
-                "Unit": "Houston",
-                "Region": "South",
-                "BillingType": "Fixed",
-                "AE": "Meech",
-                "Lead": "",
-                "TeamMembers": "",
-                "Details": "about to stert in first quarter of 2017, need 3 developers and 1 lead",
-                "ExpectedValue": 200000,
-                "Stage": "03",
-                "RiskLevel": "Medium"         
-            },
-            {
-                "PursuitNumber": 2,
-                "PursuitName": "Pursuit 2",
-                "ClientName": "Client 1",        
-                "isActive": false,
-                "Unit": "Houston",
-                "Region": "South",
-                "BillingType": "T&M",
-                "AE": "Meech",
-                "Lead": "",
-                "TeamMembers": "",
-                "Details": "Finished the project in last quarter of 2016",
-                "ExpectedValue": 200000,
-                "Stage": "08",
-                "RiskLevel": "High"         
-            },
-            {
-                "PursuitNumber": 3,
-                "PursuitName": "Pursuit 3",
-                "ClientName": "Client 2",        
-                "isActive": true,
-                "Unit": "Houston",
-                "Region": "South",
-                "BillingType": "T&M",
-                "AE": "Tricia",
-                "Lead": "",
-                "TeamMembers": "",
-                "Details": "about to stert in first quarter of 2017, need 3 developers and 1 lead",
-                "ExpectedValue": 400000,
-                "Stage": "04",
-                "RiskLevel": "Medium"         
-            }
-        ];
+        this.getPursuitsData().subscribe(i => this.pursuits = i);
+        return this.pursuits;
+    }
+
+    getPursuitsData(): Observable<IPursuit[]>{        
+        return this._http.get(this.pursuitURL).map((r:Response) => <IPursuit[]>r.json());        
     }
 
 }

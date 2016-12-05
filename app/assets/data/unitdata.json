@@ -1,0 +1,29 @@
+[
+    {
+        "ID": 1,
+        "Name": "Houston",
+        "Region": "South",
+        "State": "Texas",        
+        "latitude": 29.76043,
+        "longitude": -95.36980,
+        "GVP": "Cynthia"        
+    },
+    {
+        "ID": 2,
+        "Name": "Dallas",
+        "Region": "South",
+        "State": "Texas",        
+        "latitude": 32.77666,
+        "longitude": -96.79699,
+        "GVP": "Cynthia"         
+    },
+    {
+        "ID": 3,
+        "Name": "Austin",
+        "Region": "South",
+        "State": "Texas",        
+        "latitude": 30.26715,
+        "longitude": -97.74306,
+        "GVP": "Cynthia"       
+    }
+]

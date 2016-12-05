@@ -1,0 +1,55 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{getTitle()}}
+    </div>
+    <!-- Filter the units   -->
+    <div class='panel-body'>
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+        <div class='table-responsive'>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class='col-sm-4 col-md-4 col-lg-4'>                        
+                        <table *ngIf='unit'>                
+                            <tr><td>Unit ID </td><td> &nbsp;: &nbsp;</td>                    
+                                <td>{{ unit.ID}}</td>
+                            </tr>
+                            <tr><td>Name </td><td> &nbsp;: &nbsp;</td>
+                                <td>{{ unit.Name }}</td>
+                            </tr>
+                            <tr><td>Region </td><td> &nbsp;: &nbsp;</td>
+                                <td>{{ unit.Region }}</td>
+                            </tr>
+                            <tr><td>State </td><td> &nbsp;: &nbsp;</td>
+                                <td>{{ unit.State }}</td>
+                            </tr>
+                            <tr><td>latitude </td><td> &nbsp;: &nbsp;</td>
+                                <td>{{ unit.latitude }}</td>
+                            </tr>
+                            <tr><td>longitude </td><td> &nbsp;: &nbsp;</td>
+                                <td>{{ unit.longitude }}</td>
+                            </tr>
+                            <tr><td>GVP </td><td> &nbsp;: &nbsp;</td>
+                                <td>{{ unit.GVP }} </td>
+                            </tr>
+                            <tr><td>No of Consultants </td><td> &nbsp;: &nbsp;</td>
+                                <td>{{ totalConsultants }}</td>
+                            </tr> 
+                            <tr><td colspan="3">
+                                <br>
+                                <a class="btn btn-default"  (click)="onBack()"> < Back</a> </td>
+                            </tr>                               
+                        </table>
+                    </div>
+                    <div class='col-sm-4 col-md-4 col-lg-4'>
+                        <!-- chart -->
+                        <chart [options]="atoCharoptions"></chart>   
+                    </div>
+                    <div class='col-sm-4 col-md-4 col-lg-4'>
+                        <!-- chart -->
+                        <chart [options]="practiceCharoptions"></chart>   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

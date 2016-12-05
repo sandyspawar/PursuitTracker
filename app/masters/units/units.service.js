@@ -9,45 +9,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+require("rxjs/add/operator/map");
 var UnitService = (function () {
-    function UnitService() {
+    function UnitService(_http) {
+        this._http = _http;
+        this.unitURL = 'app/assets/data/unitdata.json';
     }
+    UnitService.prototype.getUnit = function (id) {
+        var _this = this;
+        this.getUnitData().subscribe(function (d) { return _this.units = d; });
+        return this.units.find(function (i) { return i.ID == id; });
+    };
+    UnitService.prototype.getUnitData = function () {
+        return this._http.get(this.unitURL).map(function (r) { return r.json(); });
+    };
     UnitService.prototype.getUnits = function () {
-        return [
-            {
-                "Name": "Houston",
-                "Region": "South",
-                "State": "Texas",
-                "latitude": 29.76043,
-                "longitude": -95.36980,
-                "GVP": "Cynthia",
-                "NoofConsultants": 101
-            },
-            {
-                "Name": "Dallas",
-                "Region": "South",
-                "State": "Texas",
-                "latitude": 32.77666,
-                "longitude": -96.79699,
-                "GVP": "Cynthia",
-                "NoofConsultants": 120
-            },
-            {
-                "Name": "Austin",
-                "Region": "South",
-                "State": "Texas",
-                "latitude": 30.26715,
-                "longitude": -97.74306,
-                "GVP": "Cynthia",
-                "NoofConsultants": 111
-            }
-        ];
+        var _this = this;
+        this.getUnitData().subscribe(function (d) { return _this.units = d; });
+        return this.units;
     };
     return UnitService;
 }());
 UnitService = __decorate([
     core_1.Injectable(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [http_1.Http])
 ], UnitService);
 exports.UnitService = UnitService;
 //# sourceMappingURL=units.service.js.map

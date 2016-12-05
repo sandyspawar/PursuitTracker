@@ -12,9 +12,10 @@ var core_1 = require("@angular/core");
 var pursuit_service_1 = require("./pursuit.service");
 var router_1 = require("@angular/router");
 var PursuitDetailComponent = (function () {
-    function PursuitDetailComponent(_pursuitService, _route) {
+    function PursuitDetailComponent(_pursuitService, _route, _router) {
         this._pursuitService = _pursuitService;
         this._route = _route;
+        this._router = _router;
         this.pageTitle = "Pursuit Detail";
         this.showPursuitInfo = false;
     }
@@ -32,6 +33,9 @@ var PursuitDetailComponent = (function () {
     PursuitDetailComponent.prototype.getTitle = function () {
         return this.pageTitle;
     };
+    PursuitDetailComponent.prototype.onBack = function () {
+        this._router.navigate(['/pursuits']);
+    };
     return PursuitDetailComponent;
 }());
 PursuitDetailComponent = __decorate([
@@ -42,7 +46,8 @@ PursuitDetailComponent = __decorate([
         styleUrls: ['pursuit-list.component.css']
     }),
     __metadata("design:paramtypes", [pursuit_service_1.PursuitService,
-        router_1.ActivatedRoute])
+        router_1.ActivatedRoute,
+        router_1.Router])
 ], PursuitDetailComponent);
 exports.PursuitDetailComponent = PursuitDetailComponent;
 ;
