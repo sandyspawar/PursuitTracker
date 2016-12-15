@@ -17,6 +17,10 @@ var PursuitListComponent = (function () {
         this.showPursuitInfo = false;
         this.listFilter = "";
     }
+    PursuitListComponent.prototype.getAllPursuits = function () {
+        console.log("Show All pursuits");
+        this.listFilter = "";
+    };
     PursuitListComponent.prototype.togglePursuitInfo = function () {
         this.showPursuitInfo = !this.showPursuitInfo;
     };
@@ -25,8 +29,9 @@ var PursuitListComponent = (function () {
     };
     // component life cycle events
     PursuitListComponent.prototype.ngOnInit = function () {
+        var _this = this;
         console.log("on Init");
-        this.pursuits = this._pursuitService.getPursuits();
+        this._pursuitService.getPursuits().subscribe(function (d) { return _this.pursuits = d; });
     };
     return PursuitListComponent;
 }());

@@ -1,10 +1,46 @@
-.navbar {
-    font-size: 1.1em;
+div.panel-heading {
+   font-size: small !important;
+   padding: 5px 10px !important;
 }
 
-.panel-heading{
-    font-size: 1.2em;
-    background-color: orangered;
-    padding: .5em .5em;
+.navbar-brand{
+    padding: 1px 5px !important;
+}
+.navbar{
+    min-height: 10px !important;
+    margin-bottom: 5px !important;
 }
 
+.navbar-nav > li > a {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    line-height: 15px !important;
+}
+
+.nav > li > a {
+    padding:5px 10px !important;
+}
+
+#s4-ribbonrow, .ms-cui-topBar2, .s4-notdlg, 
+.s4-pr s4-ribbonrowhidetitle, .s4-notdlg noindex, 
+#ms-cui-ribbonTopBars, #s4-titlerow, #s4-pr s4-notdlg s4-titlerowhidetitle, 
+#s4-leftpanel-content {
+    display:none !important;
+}
+
+#s4-leftpanel-content {
+    display:none !important;
+}
+
+.ms-core-navigation { 
+    display: none !important;
+}
+
+#contentBox { 
+    margin-left: 0px !important;
+    padding-top: 1px !important;
+}
+
+.s4-ca{
+    margin-left:0px !important; margin-right:0px !important;
+}

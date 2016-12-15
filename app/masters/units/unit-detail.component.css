@@ -1,9 +1,9 @@
-.panel-heading{
-    font-size: 1.1em;
-    background-color: orangered;
-    padding: .2em .2em;
-}
-
 chart{
-    width: 400px !important;
+    width: 350px !important;
+}
+.btn{
+    padding: 6px 6px;
+    font-size: small;
+    line-height: .9;
+    
 }

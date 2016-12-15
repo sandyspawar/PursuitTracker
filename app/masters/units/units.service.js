@@ -14,20 +14,20 @@ require("rxjs/add/operator/map");
 var UnitService = (function () {
     function UnitService(_http) {
         this._http = _http;
-        this.unitURL = 'app/assets/data/unitdata.json';
+        this.unitURL = 'app/assets/data/unitdata.txt';
     }
+    // following function emits particular unit data
+    // based on unit id passed
     UnitService.prototype.getUnit = function (id) {
-        var _this = this;
-        this.getUnitData().subscribe(function (d) { return _this.units = d; });
-        return this.units.find(function (i) { return i.ID == id; });
+        // use find method on result 
+        // since we want to return only one value
+        return this.getUnits()
+            .map(function (units) { return units.find(function (v) { return v.ID == id; }); });
     };
-    UnitService.prototype.getUnitData = function () {
-        return this._http.get(this.unitURL).map(function (r) { return r.json(); });
-    };
+    // following function emits all units details
     UnitService.prototype.getUnits = function () {
-        var _this = this;
-        this.getUnitData().subscribe(function (d) { return _this.units = d; });
-        return this.units;
+        return this._http.get(this.unitURL)
+            .map(function (r) { return r.json(); });
     };
     return UnitService;
 }());

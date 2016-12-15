@@ -1,33 +1,52 @@
-﻿<div class="mapattribute">
+﻿<div class="container">
     <div class="row" >            
-        <div class="col-sm-12">
-            <sebm-google-map disableDefaultUI="true" [zoom]="5" [latitude]="lat" [longitude]="lng">
-                <sebm-google-map-marker *ngFor='let unit of units' [latitude]='unit.latitude' 
-                            [longitude]='unit.longitude'
-                            [title]='unit.Name'>
-                            <sebm-google-map-info-window>
-                                <table>
-                                    <tr>
-                                        <td>Region</td><td>:</td>
-                                        <td>{{unit.Region}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>GVP</td><td>:</td>
-                                        <td>{{unit.GVP}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>No of Consultants &nbsp;</td><td>:</td>
-                                        <td>{{unit.NoofConsultants}}</td>
-                                    </tr>
-                                </table>
-                            </sebm-google-map-info-window>
-                </sebm-google-map-marker>
-            </sebm-google-map>   
+        <div class="col-sm-6">
+            <div class='panel panel-primary'>
+                <div class='panel-heading'>
+                    Units locations on map
+                </div>
+                <sebm-google-map disableDefaultUI="true" [zoom]="5" [latitude]="lat" [longitude]="lng">
+                    <sebm-google-map-marker *ngFor='let unit of units' [latitude]='unit.latitude' 
+                                [longitude]='unit.longitude'
+                                [title]='unit.Name'
+                                (markerClick)="updateCurrentUnitID(unit.ID)"
+                                >
+                                <sebm-google-map-info-window >
+                                    <table>
+                                        <tr>
+                                            <td>Region</td><td>:</td>
+                                            <td>{{unit.Region}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>GVP</td><td>:</td>
+                                            <td>{{unit.GVP}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>No of Consultants &nbsp;</td><td>:</td>
+                                            <td>{{unit.ConsultantCount}}</td>
+                                        </tr>
+                                    </table>
+                                </sebm-google-map-info-window>
+                    </sebm-google-map-marker>
+                </sebm-google-map>
+            </div>
+            <div class="alert alert-info">
+                <strong>Info!</strong> Click marker on google map to get Unit details
+            </div>    
+        </div>
+        <div class="col-sm-6">
+            <!-- Show pursuits for unit
+            when we are using propery binding we use []
+            in our case unitid is property of nesed class
+            -->
+            <pm-cv-pursuits [unitID] = 'currentunitID'> </pm-cv-pursuits>
+             <div class="alert alert-info">
+                <strong>Info!</strong> ^ showing list of all pursuits, filter using pursuit name.
+            </div> 
         </div>
     </div>        
     <div class="row">
-        <div class="text-center">Developed by:</div>
-        <div class="text-center"><h4 class="text-center">Sandeep Pawar</h4></div>
+        <div class="text-center">Developed by: <b>Sandeep Pawar</b></div>
         <div class="text-center">
             <a href="http://sandeeppawar.blogspot.com">http://sandeeppawar.blogspot.com</a>
         </div>

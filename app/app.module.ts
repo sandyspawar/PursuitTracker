@@ -14,8 +14,13 @@ import { PursuitListComponent} from './pursuits/pursuit-list.component';
 import { PursuitDetailComponent} from './pursuits/pursuit-detail.component';
 import { RiskComponent } from './shared/risk/risk.component';
 import { WelcomeComponent } from './home/welcome.component';
+import { PursuitCompactViewComponent } from './pursuits/pursuit-compactview.component';
+import { PursuitFilterPipe } from './pursuits/pursuits-filter.pipe';
+import { UnitFilterPipe } from './masters/units/units-filter.pipe';
 
+import { UnitFormComponent } from './masters/units/unit-form.component';
 
+// 
 @NgModule({
   imports: [ BrowserModule, CommonModule, FormsModule, 
             ChartModule, HttpModule,  
@@ -24,15 +29,20 @@ import { WelcomeComponent } from './home/welcome.component';
               { path: 'unit/:id', component: UnitDetailComponent},
               { path: 'pursuits', component: PursuitListComponent},
               { path: 'pursuit/:id', component: PursuitDetailComponent},
+              { path: 'addunit', component: UnitFormComponent},
               { path: 'welcome', component: WelcomeComponent},
               { path: '', redirectTo: 'welcome', pathMatch: 'full'},
               { path: '**' , redirectTo: 'welcome', pathMatch: 'full'}
             ]),
-            AgmCoreModule.forRoot()
+            AgmCoreModule.forRoot({
+              apiKey: 'AIzaSyB0KzWhVpdX3866zxRuum_PdCAoqLFI5e0'
+            })
            ],
-  declarations: [ AppComponent, PursuitListComponent, PursuitDetailComponent, 
+  declarations: [ AppComponent, PursuitListComponent, PursuitDetailComponent,
+                  PursuitCompactViewComponent, PursuitFilterPipe, 
                   RiskComponent, WelcomeComponent, 
-                  UnitListComponent, UnitDetailComponent],
+                  UnitListComponent, UnitDetailComponent, UnitFormComponent,
+                  UnitFilterPipe],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

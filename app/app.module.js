@@ -23,6 +23,11 @@ var pursuit_list_component_1 = require("./pursuits/pursuit-list.component");
 var pursuit_detail_component_1 = require("./pursuits/pursuit-detail.component");
 var risk_component_1 = require("./shared/risk/risk.component");
 var welcome_component_1 = require("./home/welcome.component");
+var pursuit_compactview_component_1 = require("./pursuits/pursuit-compactview.component");
+var pursuits_filter_pipe_1 = require("./pursuits/pursuits-filter.pipe");
+var units_filter_pipe_1 = require("./masters/units/units-filter.pipe");
+var unit_form_component_1 = require("./masters/units/unit-form.component");
+// 
 var AppModule = (function () {
     function AppModule() {
     }
@@ -37,15 +42,20 @@ AppModule = __decorate([
                 { path: 'unit/:id', component: unit_detail_component_1.UnitDetailComponent },
                 { path: 'pursuits', component: pursuit_list_component_1.PursuitListComponent },
                 { path: 'pursuit/:id', component: pursuit_detail_component_1.PursuitDetailComponent },
+                { path: 'addunit', component: unit_form_component_1.UnitFormComponent },
                 { path: 'welcome', component: welcome_component_1.WelcomeComponent },
                 { path: '', redirectTo: 'welcome', pathMatch: 'full' },
                 { path: '**', redirectTo: 'welcome', pathMatch: 'full' }
             ]),
-            core_2.AgmCoreModule.forRoot()
+            core_2.AgmCoreModule.forRoot({
+                apiKey: 'AIzaSyB0KzWhVpdX3866zxRuum_PdCAoqLFI5e0'
+            })
         ],
         declarations: [app_component_1.AppComponent, pursuit_list_component_1.PursuitListComponent, pursuit_detail_component_1.PursuitDetailComponent,
+            pursuit_compactview_component_1.PursuitCompactViewComponent, pursuits_filter_pipe_1.PursuitFilterPipe,
             risk_component_1.RiskComponent, welcome_component_1.WelcomeComponent,
-            unit_list_component_1.UnitListComponent, unit_detail_component_1.UnitDetailComponent],
+            unit_list_component_1.UnitListComponent, unit_detail_component_1.UnitDetailComponent, unit_form_component_1.UnitFormComponent,
+            units_filter_pipe_1.UnitFilterPipe],
         bootstrap: [app_component_1.AppComponent]
     }),
     __metadata("design:paramtypes", [])

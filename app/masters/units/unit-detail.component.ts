@@ -42,30 +42,33 @@ export class UnitDetailComponent implements OnInit
             private _route: ActivatedRoute,
             private _router: Router)
     {
-
+        
     }
 
-    getTitle(): string
-    {
-        return this.pageTitle + " (Current)";
-    }
-
-    ngOnInit(): void{
+    ngOnInit(): void{        
         let id: number;
-        id = this._route.snapshot.params['id'];
+        this._route.params.subscribe(param => {
+            id = param['id'];
+            console.log("Parameter changed to : " + id );
+            // fetch the details of unit
+            this._unitService.getUnit(id)
+                    .subscribe(d => {
+                                        this.unit = d;
+                                        this.pageTitle = "Unit :- " + d.Name ;
+                                    });
 
-        // fetch the details of unit
-        this.unit = this._unitService.getUnit(id);
+            // fecth all consultants in array for selected unit
+            this._consultantService.getUnitConsultants(id)
+                    .subscribe(d => {
+                                        this.consultants = d;
+                                        console.log("Total consultants : " + this.consultants.length);
+                                        // call function to set ATO Pie Chart
+                                        this.setATOChart();
+                                        // call function to set Prctice Pie Chart
+                                        this.setPracticeChart();
+                                        });
 
-        // fecth all consultants in array for selected unit
-        this.consultants = this._consultantService.getUnitConsultants(id);
-
-        // call function to set ATO Pie Chart
-        this.setATOChart();
-        
-        // call function to set Prctice Pie Chart
-        this.setPracticeChart();
-        
+        });
     }
 
     // function to set Practice Pie chart

@@ -1,11 +1,11 @@
-<div class='panel panel-primary'>
-    <div class='panel-heading'>
-        {{getTitle()}}
-    </div>
-    <!-- Filter the units   -->
-    <div class='panel-body'>
-        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
-        <div class='table-responsive'>
+<div class="container">
+    <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            {{ pageTitle }}
+        </div>
+        <!-- Filter the units   -->
+        <div class='panel-body'>
+            <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>        
             <div class="container-fluid">
                 <div class="row">
                     <div class='col-sm-4 col-md-4 col-lg-4'>                        

@@ -1,0 +1,104 @@
+<div class="container">
+    <div class='panel panel-primary'>
+        <div class='panel-heading'>
+            {{pageTitle}}
+        </div>
+        <!-- Add the pursuit   -->
+        <div class='panel-body'>
+            <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>
+            <div class="alert alert-success" *ngIf='informationMessage'>
+                <strong>Success!</strong><br> Thank you, {{informationMessage}}
+            </div>
+            <div>
+                <form #form="ngForm" novalidate>
+                    <div class="row">
+                        <div class='col-sm-5 col-md-5 col-lg-5'>
+                            <div class="form-group">
+                                <label>Unit</label>
+                                <input #unitid="ngModel" required type="number" 
+                                    class="form-control" [(ngModel)] = "unit.ID"
+                                    name="unitid">
+                                <div *ngIf="unitid.invalid" 
+                                    class="alert alert-danger">
+                                    Unit ID is required and should be number.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class='col-sm-5 col-md-5 col-lg-5'>
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input #unitname="ngModel" required type="text" 
+                                    class="form-control" [(ngModel)] = "unit.Name"
+                                    name="unitname">
+                                <div *ngIf="unitname.invalid" 
+                                    class="alert alert-danger">
+                                    Unit name is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Region</label>
+                                <input #region="ngModel" required type="text" 
+                                    class="form-control" [(ngModel)] = "unit.Region"
+                                    name="region">
+                                <div *ngIf="region.invalid" 
+                                    class="alert alert-danger">
+                                    Region is required.
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label>State</label>
+                                <input #state="ngModel" required type="text" 
+                                    class="form-control" [(ngModel)] = "unit.State"
+                                    name="state">
+                                <div *ngIf="state.invalid" 
+                                    class="alert alert-danger">
+                                    State is required.
+                                </div>
+                            </div>   
+                        </div>
+                        <div class='col-sm-5 col-md-5 col-lg-5'>
+                            <div class="form-group">
+                                <label>Latitude</label>
+                                <input #latitude="ngModel" required type="number" 
+                                    class="form-control" [(ngModel)] = "unit.latitude"
+                                    name="latitude">
+                                <div *ngIf="latitude.invalid" 
+                                    class="alert alert-danger">
+                                    Latitude is required.
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Longitude</label>
+                                <input #longitude="ngModel" required type="number" 
+                                    class="form-control" [(ngModel)] = "unit.longitude"
+                                    name="longitude">
+                                <div *ngIf="longitude.invalid" 
+                                    class="alert alert-danger">
+                                    Longitude is required.
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label>GVP</label>
+                                <input #gvp="ngModel" required type="text" 
+                                    class="form-control" [(ngModel)] = "unit.GVP"
+                                    name="gvp">
+                                <div *ngIf="gvp.invalid" 
+                                    class="alert alert-danger">
+                                    GVP name is required.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <button class="btn btn-default" type="submit" 
+                            [disabled]="form.invalid && form.dirty"
+                            (click) = "onAddUnitClicked()"
+                            >Add Pursuit
+                    </button> 
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

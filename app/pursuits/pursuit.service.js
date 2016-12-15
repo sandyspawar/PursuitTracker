@@ -14,19 +14,18 @@ require("rxjs/add/operator/map");
 var PursuitService = (function () {
     function PursuitService(_http) {
         this._http = _http;
-        this.pursuitURL = 'app/assets/data/pursuitdata.json';
+        this.pursuitURL = 'app/assets/data/pursuitdata.txt'; //
     }
+    // following function emits particular pursuit details
+    // based on pursuit id passed
     PursuitService.prototype.getPursuit = function (id) {
-        var _this = this;
-        this.getPursuitsData().subscribe(function (i) { return _this.pursuits = i; });
-        return this.pursuits.find(function (i) { return i.PursuitNumber == id; });
+        // use find method on result 
+        // since we want to return only one value
+        return this.getPursuits()
+            .map(function (pursuits) { return pursuits.find(function (d) { return d.PursuitNumber == id; }); });
     };
+    // following function emits all pursuit details
     PursuitService.prototype.getPursuits = function () {
-        var _this = this;
-        this.getPursuitsData().subscribe(function (i) { return _this.pursuits = i; });
-        return this.pursuits;
-    };
-    PursuitService.prototype.getPursuitsData = function () {
         return this._http.get(this.pursuitURL).map(function (r) { return r.json(); });
     };
     return PursuitService;

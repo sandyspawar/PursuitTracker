@@ -5,7 +5,9 @@ import { ConsultantService } from '../../consultants/consultant.service';
 import { IConsultant } from '../../consultants/Iconsultant';
 
 import {UnitDetailComponent} from './unit-detail.component';
+import {UnitFilterPipe} from './units-filter.pipe';
 
+import { Observable} from 'rxjs/Observable';
 
 @Component({
     selector: "pm-unit",
@@ -16,11 +18,11 @@ import {UnitDetailComponent} from './unit-detail.component';
 
 export class UnitListComponent implements OnInit
 {
-    pageTitle: string = "Units List";
+    pageTitle: string = "Unit List";
     listFilter: string = "";
     units: IUnit[];
     consultants: IConsultant[];
-
+    
     // constructor of Unit Class
     // which initilize the satic version of service class for use
     constructor(private _unitservice: UnitService, 
@@ -28,6 +30,10 @@ export class UnitListComponent implements OnInit
 
     }
 
+    getAllUnits(){
+        console.log("Show All Units");
+        this.listFilter = "";
+    }
 
     getTitle(): string
     {
@@ -38,14 +44,15 @@ export class UnitListComponent implements OnInit
     ngOnInit(): void
     {
         console.log("on Init");
-        this.units = this._unitservice.getUnits();  
-
-        // fecth all consultants in array for selected unit
-        this.consultants = this._consultantService.getConsultants();      
-    } 
-    // this method accepts the Unit ID as parameter 
-    // and returns the number of consultants in same unit
-    getUnitConsultants(ID: number): number{
-        return this.consultants.filter(c => c.UnitID == ID).length;
+        // get all units
+        this._unitservice.getUnits()
+            .subscribe(d => { this.units = d;
+                            console.log("total units :" + this.units.length);
+                            this.units.forEach(p => 
+                                this._consultantService.getUnitConsultants(p.ID)
+                                .subscribe(g => p.ConsultantCount = g.length)
+                                );
+                        }
+            );                
     }
 }

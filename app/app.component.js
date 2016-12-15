@@ -13,9 +13,14 @@ var pursuit_service_1 = require("./pursuits/pursuit.service");
 var units_service_1 = require("./masters/units/units.service");
 var consultant_service_1 = require("./consultants/consultant.service");
 var AppComponent = (function () {
-    function AppComponent() {
-        this.pageTitle = "Pursuits Tracker";
+    function AppComponent(_unitService) {
+        this._unitService = _unitService;
+        this.pageTitle = "Pursuits Tracker Tool";
     }
+    AppComponent.prototype.ngOnInit = function () {
+        var _this = this;
+        this._unitService.getUnits().subscribe(function (d) { return _this.units = d; });
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
@@ -24,7 +29,7 @@ AppComponent = __decorate([
         templateUrl: 'app/app.component.html',
         providers: [pursuit_service_1.PursuitService, units_service_1.UnitService, consultant_service_1.ConsultantService]
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [units_service_1.UnitService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

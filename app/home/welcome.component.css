@@ -1,10 +1,21 @@
 .sebm-google-map-container {
-  height: 375px;
+  height: 380px;
 }
 
 .mapattribute{
+  margin-top: 0.5em;
   margin-left: 0.5em;
   margin-right: 0.5em;
   align-self: center;
   -webkit-box-align: center;
+}
+
+.panel{
+  margin-bottom: 0px;
+}
+.alert{
+    padding: 1px;
+    margin-bottom: 3px;
+    font-size: 10px;
+    margin-top: 5px !important;
 }

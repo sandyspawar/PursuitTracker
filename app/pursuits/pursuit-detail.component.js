@@ -20,12 +20,13 @@ var PursuitDetailComponent = (function () {
         this.showPursuitInfo = false;
     }
     PursuitDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var id;
         id = this._route.snapshot.params['id'];
         this.pageTitle += ' - ' + id.toString();
         // since we received the id, get the product detail
         // based on id
-        this.pursuit = this._pursuitService.getPursuit(id);
+        this._pursuitService.getPursuit(id).subscribe(function (d) { return _this.pursuit = d; });
     };
     PursuitDetailComponent.prototype.togglePursuitInfo = function () {
         this.showPursuitInfo = !this.showPursuitInfo;

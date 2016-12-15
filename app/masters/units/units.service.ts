@@ -4,29 +4,27 @@ import { Http} from '@angular/http';
 import { Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-
 @Injectable()
 export class UnitService
 {
-    unitURL: string = 'app/assets/data/unitdata.json';
-    units: IUnit[];
+    unitURL: string = 'app/assets/data/unitdata.txt';
 
     constructor(private _http: Http){
 
     }
 
-    getUnit(id: number): IUnit{        
-        this.getUnitData().subscribe(d => this.units = d);
-        return this.units.find(i => i.ID == id);
+    // following function emits particular unit data
+    // based on unit id passed
+    getUnit(id: number): Observable<IUnit>{
+        // use find method on result 
+        // since we want to return only one value
+       return this.getUnits()
+            .map((units: IUnit[]) => units.find(v => v.ID == id));
     }
 
-    getUnitData(): Observable<IUnit[]>{
-        return this._http.get(this.unitURL).map(r => <IUnit[]>r.json());
+    // following function emits all units details
+    getUnits(): Observable<IUnit[]>{
+        return this._http.get(this.unitURL)
+            .map(r => <IUnit[]>r.json());        
     }
-
-    getUnits(): IUnit[]{
-        this.getUnitData().subscribe(d => this.units = d);
-        return this.units;
-    }
-
 }

@@ -28,7 +28,7 @@ export class PursuitDetailComponent implements OnInit{
         this.pageTitle += ' - ' + id.toString(); 
         // since we received the id, get the product detail
         // based on id
-        this.pursuit = this._pursuitService.getPursuit(id);
+        this._pursuitService.getPursuit(id).subscribe(d => this.pursuit = d);
     }
 
     togglePursuitInfo(): void

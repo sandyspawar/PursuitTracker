@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PursuitService } from './pursuits/pursuit.service';
 import { UnitService} from './masters/units/units.service';
 import { ConsultantService} from './consultants/consultant.service';
+import { IUnit } from './masters/units/IUnit';
 
 @Component({
     selector: 'pm-app',
@@ -9,11 +10,15 @@ import { ConsultantService} from './consultants/consultant.service';
     providers: [PursuitService, UnitService, ConsultantService]
 })
 
-export class AppComponent { 
-    pageTitle: string = "Pursuits Tracker";
+export class AppComponent implements OnInit{ 
+    pageTitle: string = "Pursuits Tracker Tool";
+    units: IUnit[];
 
-    constructor()
-    {
-            
+    constructor(private _unitService: UnitService)
+    {            
+    }
+
+    ngOnInit(): void{
+        this._unitService.getUnits().subscribe(d => this.units = d);
     }    
 }

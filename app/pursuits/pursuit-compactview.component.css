@@ -1,0 +1,20 @@
+.panel-body-font
+{
+    font-size: smaller;
+}
+
+.panel
+{
+    margin-bottom: 0px;
+}
+
+.risk-body
+{
+    font-size: x-small;
+}
+.btn{
+    padding: 6px 6px;
+    font-size: smaller;
+    line-height: .6;
+    
+}

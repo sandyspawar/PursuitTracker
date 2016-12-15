@@ -11,28 +11,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/map");
+require("rxjs/add/operator/count");
+require("rxjs/add/operator/toPromise");
 var ConsultantService = (function () {
     function ConsultantService(_http) {
         this._http = _http;
-        this.consultantURL = 'app/assets/data/consultant.json';
+        this.consultantURL = 'app/assets/data/consultant.txt'; //
     }
-    ConsultantService.prototype.getConsultantsData = function () {
-        return this._http.get(this.consultantURL).map(function (r) { return r.json(); });
-    };
+    /*// following function emits consultants data
+    // from the particular unit based on the unit id passed
+    getUnitConsultantsCount(id: number): number{
+        // use filter method on result
+        // since we want to return more than one values
+        var count = 90;
+        this.getConsultants()
+            .map((consultants : IConsultant[]) => consultants.filter(d => d.UnitID == id))
+            .count().subscribe(p => count = p);
+        return count;
+    }
+    */
+    // following function emits consultants data
+    // from the particular unit based on the unit id passed
     ConsultantService.prototype.getUnitConsultants = function (id) {
-        var _this = this;
-        this.getConsultantsData().subscribe(function (d) { return _this.consultants = d; });
-        return this.consultants.filter(function (i) { return i.UnitID == id; });
+        // use filter method on result 
+        // since we want to return more than one values
+        return this.getConsultants()
+            .map(function (consultants) { return consultants.filter(function (d) { return d.UnitID == id; }); });
     };
+    // following function emits particular consultant data
+    // based on id is passed
     ConsultantService.prototype.getConsultant = function (id) {
-        var _this = this;
-        this.getConsultantsData().subscribe(function (d) { return _this.consultants = d; });
-        return this.consultants.find(function (i) { return i.UnitID == id; });
+        // use find method on result 
+        // since we want to return only one value
+        return this.getConsultants()
+            .map(function (consultants) { return consultants.find(function (d) { return d.ConsultantID == id; }); });
     };
+    // following function emits all consultants details
     ConsultantService.prototype.getConsultants = function () {
-        var _this = this;
-        this.getConsultantsData().subscribe(function (d) { return _this.consultants = d; });
-        return this.consultants;
+        return this._http.get(this.consultantURL)
+            .map(function (r) { return r.json(); });
     };
     return ConsultantService;
 }());

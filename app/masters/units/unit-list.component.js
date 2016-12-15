@@ -17,23 +17,30 @@ var UnitListComponent = (function () {
     function UnitListComponent(_unitservice, _consultantService) {
         this._unitservice = _unitservice;
         this._consultantService = _consultantService;
-        this.pageTitle = "Units List";
+        this.pageTitle = "Unit List";
         this.listFilter = "";
     }
+    UnitListComponent.prototype.getAllUnits = function () {
+        console.log("Show All Units");
+        this.listFilter = "";
+    };
     UnitListComponent.prototype.getTitle = function () {
         return this.pageTitle + " (Current)";
     };
     // component life cycle events
     UnitListComponent.prototype.ngOnInit = function () {
+        var _this = this;
         console.log("on Init");
-        this.units = this._unitservice.getUnits();
-        // fecth all consultants in array for selected unit
-        this.consultants = this._consultantService.getConsultants();
-    };
-    // this method accepts the Unit ID as parameter 
-    // and returns the number of consultants in same unit
-    UnitListComponent.prototype.getUnitConsultants = function (ID) {
-        return this.consultants.filter(function (c) { return c.UnitID == ID; }).length;
+        // get all units
+        this._unitservice.getUnits()
+            .subscribe(function (d) {
+            _this.units = d;
+            console.log("total units :" + _this.units.length);
+            _this.units.forEach(function (p) {
+                return _this._consultantService.getUnitConsultants(p.ID)
+                    .subscribe(function (g) { return p.ConsultantCount = g.length; });
+            });
+        });
     };
     return UnitListComponent;
 }());

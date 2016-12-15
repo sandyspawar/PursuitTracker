@@ -26,20 +26,29 @@ var UnitDetailComponent = (function () {
         // to plot on Y-Axis of Practice Pie Chart
         this.practicedata = [];
     }
-    UnitDetailComponent.prototype.getTitle = function () {
-        return this.pageTitle + " (Current)";
-    };
     UnitDetailComponent.prototype.ngOnInit = function () {
+        var _this = this;
         var id;
-        id = this._route.snapshot.params['id'];
-        // fetch the details of unit
-        this.unit = this._unitService.getUnit(id);
-        // fecth all consultants in array for selected unit
-        this.consultants = this._consultantService.getUnitConsultants(id);
-        // call function to set ATO Pie Chart
-        this.setATOChart();
-        // call function to set Prctice Pie Chart
-        this.setPracticeChart();
+        this._route.params.subscribe(function (param) {
+            id = param['id'];
+            console.log("Parameter changed to : " + id);
+            // fetch the details of unit
+            _this._unitService.getUnit(id)
+                .subscribe(function (d) {
+                _this.unit = d;
+                _this.pageTitle = "Unit :- " + d.Name;
+            });
+            // fecth all consultants in array for selected unit
+            _this._consultantService.getUnitConsultants(id)
+                .subscribe(function (d) {
+                _this.consultants = d;
+                console.log("Total consultants : " + _this.consultants.length);
+                // call function to set ATO Pie Chart
+                _this.setATOChart();
+                // call function to set Prctice Pie Chart
+                _this.setPracticeChart();
+            });
+        });
     };
     // function to set Practice Pie chart
     UnitDetailComponent.prototype.setPracticeChart = function () {

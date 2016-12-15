@@ -7,25 +7,23 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class PursuitService
 {
-    pursuitURL: string = 'app/assets/data/pursuitdata.json';
-    pursuits: IPursuit[];
+    pursuitURL: string = 'app/assets/data/pursuitdata.txt';//
 
     constructor(private _http: Http){
 
     }
 
-    getPursuit(id: number): IPursuit{
-        this.getPursuitsData().subscribe(i => this.pursuits = i);
-        return this.pursuits.find(i => i.PursuitNumber == id);
+    // following function emits particular pursuit details
+    // based on pursuit id passed
+    getPursuit(id: number): Observable<IPursuit>{
+        // use find method on result 
+        // since we want to return only one value
+        return this.getPursuits()
+            .map((pursuits: IPursuit[]) => pursuits.find(d => d.PursuitNumber == id));
     }
 
-    getPursuits(): IPursuit[]{
-        this.getPursuitsData().subscribe(i => this.pursuits = i);
-        return this.pursuits;
+    // following function emits all pursuit details
+    getPursuits(): Observable<IPursuit[]>{
+        return this._http.get(this.pursuitURL).map((r:Response) => <IPursuit[]>r.json());
     }
-
-    getPursuitsData(): Observable<IPursuit[]>{        
-        return this._http.get(this.pursuitURL).map((r:Response) => <IPursuit[]>r.json());        
-    }
-
 }

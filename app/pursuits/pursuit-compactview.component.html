@@ -1,0 +1,71 @@
+<div class='panel panel-primary'>
+    <div class='panel-heading'>
+        {{getTitle()}}<div style="float:right">
+                   <a class="btn btn-default" (click)= "getAllPursuits()">
+                            Show All                             
+                            </a>                           
+                        </div>
+    </div>
+    <!-- Filter the pursuits  -->
+    <div class='panel-body'>
+        <div class='row'>
+            <div class='col-md-2'>Filter by:</div>
+            <div class='col-md-4'>
+                <input type='text' [(ngModel)]= 'listFilter' />
+            </div>
+        </div>
+        <div class='has-error' *ngIf='errorMessage'>{{errorMessage}}</div>       
+        <div>
+            <div class="panel-default" *ngFor='let pursuit of pursuits | PursuitFilter : listFilter'>
+                <div class="row panel-heading">
+                    <div class='col-md-6'> 
+                        <a data-toggle="collapse" 
+                        [attr.href]="'#C' + pursuit.PursuitNumber">
+                        {{ pursuit.PursuitName }}</a>
+                    </div>
+                    <div class='col-md-6'> 
+                        <a style="float:right" data-toggle="collapse" 
+                        [attr.href]="'#C' + pursuit.PursuitNumber">
+                        <span class="glyphicon glyphicon-chevron-down"></span></a>
+                    </div>
+                    
+                </div>
+                <div [attr.id]="'C' + pursuit.PursuitNumber" [attr.class]="'panel-collapse collapse ' + (pursuit.PursuitNumber == 1? 'in' : '')">
+                    <div class="panel-body panel-body-font">
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                Pursuit No. : {{ pursuit.PursuitNumber }}
+                            </div>
+                            <div class='col-md-4'>
+                                Client Name : {{ pursuit.ClientName}}
+                            </div>
+                            <div class='col-md-4'>
+                                Billing : {{ pursuit.BillingType}}
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-4'>
+                                A/C Ex. : {{pursuit.AE}}
+                            </div>
+                            <div class='col-md-4'>
+                                Stage : {{ pursuit.Stage}}
+                            </div>
+                            <div class='col-md-4'>
+                                Risk :
+                                <sc-risk [risklevel] ='pursuit.RiskLevel' 
+                                *ngIf='pursuit.RiskLevel' class="risk-body">
+                                </sc-risk>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md-12'>
+                                <b>Details</b> : {{pursuit.Details}}
+                            </div>                                
+                        </div>
+                    </div>
+                    <!--<div class="panel-footer">Panel Footer</div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

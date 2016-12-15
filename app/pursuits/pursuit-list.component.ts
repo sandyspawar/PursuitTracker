@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IPursuit} from './Ipursuit';
 import {PursuitService} from './pursuit.service';
 import {PursuitDetailComponent} from './pursuit-detail.component';
+import {PursuitFilterPipe} from './pursuits-filter.pipe';
 
 @Component({
     selector: "pm-pursuits",
@@ -19,6 +20,12 @@ export class PursuitListComponent implements OnInit{
     {
 
     }
+
+    getAllPursuits(){
+        console.log("Show All pursuits");
+        this.listFilter = "";
+    }
+
     togglePursuitInfo(): void
     {
         this.showPursuitInfo = !this.showPursuitInfo;
@@ -33,6 +40,6 @@ export class PursuitListComponent implements OnInit{
     ngOnInit(): void
     {
         console.log("on Init");
-        this.pursuits = this._pursuitService.getPursuits();        
+        this._pursuitService.getPursuits().subscribe(d => this.pursuits = d);        
     }
 }
